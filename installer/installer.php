@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 error_reporting(0);
 ini_set('display_errors', 'Off');
 if ($_GET['deploy'] == 'user') {
-	require_once('watermelone/config.php');
+	require_once('note/config/config.php');
 	$conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
   $sql = "CREATE TABLE IF NOT EXISTS `cmsData` (
           `postID` varchar(13) NOT NULL,
@@ -40,10 +40,11 @@ if ($_GET['deploy'] == 'user') {
   echo '
   <html>
   <head>
-  <link rel="stylesheet" href="watermelone/css/admin.css?v=1.4">
+  <link rel="stylesheet" href="note/css/admin.css?v=1.4">
   </head>
   <body>
   <div class="newuser-wrapper">
+	<div class="note"></div>
 	<div class="message loginmessage visible">
 	<p>
 		To finish the deployment, please make an admininstrator account.
@@ -70,7 +71,7 @@ if ($_GET['deploy'] == 'user') {
   </form>
   
   <p class="powered">
-    <i>Powered by Watermelone ©</i>
+    <i>Powered by Note - © 2016</i>
   </p>
 </div>
 </body>
@@ -80,7 +81,7 @@ if ($_GET['deploy'] == 'user') {
 
 else if (isset($_GET['install']) && $_GET['install'] == true) {
     /* Source File URL */
-  $remote_file_url = 'http://bramkorsten.io/downloads/watermelone/watermelone.zip';
+  $remote_file_url = 'http://bramkorsten.io/downloads/note/note.zip';
 
   /* New file name and path for this file */
   $local_file = 'installer.zip';
@@ -90,21 +91,21 @@ else if (isset($_GET['install']) && $_GET['install'] == true) {
 
   /* Add notice for success/failure */
   if( !$copy ) {
-      echo "There was an error while downloading $local_file to the server...\n";
+      echo "There was an error while downloading Note to the server...\n";
   }
   else{
-    echo "$local_file was downloaded succesfully!\n";
+    echo "Note was downloaded succesfully!\n";
     $path = pathinfo( realpath( $local_file ), PATHINFO_DIRNAME );
     $zip = new ZipArchive;
     $res = $zip->open($local_file);
     if ($res === TRUE) {
         $zip->extractTo( $path );
         $zip->close();
-        echo "$local_file has succesfully been extracted to $path";
+        echo "Note has succesfully been extracted to $path";
         $installed = true;
     }
     else {
-        echo "There was an error while opening $local_file!";
+        echo "There was an error while opening Note!";
     }
   }
   
@@ -124,7 +125,7 @@ DATABASE_FORM;
 }
 
 else if (isset($_POST['usersubmit'])) {
-	require_once('watermelone/config.php');
+	require_once('note/config/config.php');
 $conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
   $username = strip_tags($_POST['newuser']);
   $password = strip_tags($_POST['newpass']);
@@ -149,29 +150,33 @@ $conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
 		unlink("installer.zip");
 		unlink("installer.php");
 		// Redirect
-		header("Location: watermelone/adminpanel.php");
+		header("Location: note/index.php");
 		header("HTTP/1.1 303 See Other");
 		die("redirecting");
 	}
 }
 
-else if (isset($_POST['dbsubmit'])) {  
-  $config = fopen("watermelone/config.json", "w") or die('Could not build config file');
+else if (isset($_POST['dbsubmit'])) {
+	$metadata = file_get_contents('http://bramkorsten.io/downloads/note/metadata.json');
+	$metadecode = json_decode($metadata, true);
+	$newversion = $metadecode['core']['version'];
+  $config = fopen("note/config/config.json", "w") or die('Could not build config file');
   $database_info = array();
-  $info = array();
   $info = array('server'=> $_POST['dbhost'], 'username'=> $_POST['dbuser'], 'data'=> $_POST['db'], 'password'=> $_POST['dbpass']);
-  $database_info['database'] = $info;
-  $chmoded = chmod("watermelone/config.json", 0600); 
+  $versioninfo = array();
+	$database_info['database'] = $info;
+	$database_info['core'] = array('version'=> $newversion);
+  $chmoded = chmod("note/config/config.json", 0600); 
   if (!$chmoded){echo "Could not change the file permissions, you might be on localhost";}
   else {
     echo "Configuration file created! <br> Please note that the config file will not be safe if run on localhost! <br>
-    Click <a href='installer.php?deploy=user'>here</a> to continue setting up watermelone.";
+    Click <a href='installer.php?deploy=user'>here</a> to continue setting up Note.";
   }
   fwrite($config, json_encode($database_info));
   fclose($config);
 }
 
 else {
-  echo("click <a href='installer.php?install=true'>here</a> to download the latest version of watermelone");
+  echo("click <a href='installer.php?install=true'>here</a> to download the latest version of Note");
 }
 ?>
