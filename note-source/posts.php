@@ -1,15 +1,3 @@
-<?php
-  if(isset($access) && $access){
-    //File can be opened
-  }
-  else {
-   // user has no direct access to the file
-    header("HTTP/1.1 403 Forbidden");
-    exit;
-  }
-
-?>
-
 <div class="allposts-wrapper">
   <div class="allposts-container">
     <h2 class="allposts-title">
@@ -32,7 +20,7 @@
           $title
         </h3>
         <p class="allposts-post-body">$bodytext</p>
-        <div class="allposts-edit-link"><a href="adminpanel.php?edit=$postID">edit</a></div>
+        <div class="allposts-edit-link"><a href="index.php?edit=$postID">edit</a></div>
       </div>
   
 ENTRY_DISPLAY;

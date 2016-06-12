@@ -2,7 +2,7 @@
 // this should be a new version
 // php file to get all the options from a JSON file.
 // This file will parse all the nessesary options, and set them to variables.
-$json_options = file_get_contents(__DIR__ . "/../watermelone/config.json");
+$json_options = file_get_contents(dirname(__FILE__). "/config.json");
 $options = json_decode($json_options);
 // Database connection details.
 $s_Server = $options->database->server;

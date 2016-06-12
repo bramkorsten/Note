@@ -1,13 +1,3 @@
-<?php
-if(isset($access) && $access){
-  //File can be opened
-}
-else {
- // user has no direct access to the file
-  header("HTTP/1.1 403 Forbidden");
-  exit;
-}
-?>
 <div class="newuser-wrapper">
   <form class="userform" action="redirect.php" method="POST">
     <p class="label">
@@ -29,6 +19,6 @@ else {
   </form>
   
   <p class="powered">
-    <i>Powered by Watermelone ©</i>
+    <i>Powered by Note - © 2016</i>
   </p>
 </div>

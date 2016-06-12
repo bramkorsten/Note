@@ -1,16 +1,5 @@
-<?php
-if(isset($access) && $access){
-  //File can be opened
-}
-else {
- // user has no direct access to the file
-  header("HTTP/1.1 403 Forbidden");
-  exit;
-}
-
-?>
 <div class="login-wrapper">
-  <div class="melone"></div>
+  <div class="note"></div>
   <div class="message loginmessage 
               <?php if(isset($error)){
   echo ('visible');} 
@@ -39,7 +28,7 @@ else {
   </form>
   
   <p class="powered">
-    <i>Powered by <a class="audiomelonecontrol">Watermelone</a><br>
+    <i>Powered by Note<br>
       Copyright © 2016 - Bram Korsten</i>
   </p>
   <audio id="audiomelone">

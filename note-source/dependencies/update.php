@@ -1,8 +1,8 @@
 <?php
-error_reporting(-1);
-ini_set('display_errors', 'On');
+error_reporting(0);
+ini_set('display_errors', 'Off');
 if ($_GET['deploy'] == 'user') {
-	require_once('../config.php');
+	require_once('../config/config.php');
 	$conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
   $sql = "CREATE TABLE IF NOT EXISTS `cmsData` (
           `postID` varchar(13) NOT NULL,
@@ -38,14 +38,14 @@ if ($_GET['deploy'] == 'user') {
   }
   unlink("../update.zip");
 		// Redirect
-		header("Location: ../adminpanel.php");
+		header("Location: ../index.php");
 		header("HTTP/1.1 303 See Other");
 		die("redirecting");
 }
 
 else if (isset($_GET['install']) && $_GET['install'] == true) {
     /* Source File URL */
-  $remote_file_url = 'http://bramkorsten.io/downloads/watermelone/update.zip';
+  $remote_file_url = 'http://bramkorsten.io/downloads/note/update.zip';
 
   /* New file name and path for this file */
   $local_file = '../update.zip';
@@ -55,38 +55,39 @@ else if (isset($_GET['install']) && $_GET['install'] == true) {
 
   /* Add notice for success/failure */
   if( !$copy ) {
-      echo "There was an error while downloading $local_file to the server...<br>";
+      echo "There was an error while downloading the latest version of Note to the server...<br>";
   }
   else{
-    echo "$local_file was downloaded succesfully!<br>";
+    echo "Update was downloaded succesfully!<br>";
     $path = pathinfo( realpath( $local_file ), PATHINFO_DIRNAME );
     $zip = new ZipArchive;
     $res = $zip->open($local_file);
     if ($res === TRUE) {
         $zip->extractTo( $path );
         $zip->close();
-        echo "$local_file has succesfully been extracted to $path <br>";
+        echo "Update has succesfully been extracted to $path <br>";
         $installed = true;
     }
     else {
-        echo "There was an error while opening $local_file!";
+        echo "There was an error while opening the update file! ($local_file)";
     }
   }
 }
 
 else {
-  echo("click <a href='update.php?install=true'>here</a> to download the latest version of watermelone");
+  echo("click <a href='update.php?install=true'>here</a> to update to the latest version of Note.");
 }
 
-if ($installed) {  
-  $config = fopen("../config.json", "w") or die('Could not build config file');
-  $database_info = array();
-  $info = array();
-  $info = array('version'=> '1.0');
-  $database_info['core'] = $info;
-	fwrite($config, json_encode($database_info));
-  fclose($config);
+if ($installed) {
+	$metadata = file_get_contents('http://bramkorsten.io/downloads/note/metadata.json');
+	$metadecode = json_decode($metadata, true);
+	$newversion = $metadecode['core']['version'];
+	$jsonString = file_get_contents('../config/config.json');
+	$data = json_decode($jsonString, true);
+	$data['core']['version'] = $newversion;
+	$newJsonString = json_encode($data);
+	file_put_contents('../config/config.json', $newJsonString);
 	echo "Update completed!<br>
-	Click <a href='update.php?deploy=user'>here</a> to go to watermelone.";
+	Click <a href='update.php?deploy=user'>here</a> to go to Note.";
 }
 ?>

@@ -1,7 +1,6 @@
 <?php
   session_start();
-  $access = true; //required for getting config file
-  require_once('watermelone.php');
+  require_once('note.php');
 ?>
 
 <!doctype html>
@@ -10,10 +9,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ed1c24" /><!--#20C520 #ed1c24-->
-    <title>nxtCMS - Adminpanel</title>
-    <link rel="stylesheet" href="../css/style.css?v=1.4">
+    <title>Note - Adminpanel</title>
     <link rel="stylesheet" href="css/admin.css?v=1.4">
-    <link href="http://cdn.quilljs.com/latest/quill.snow.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="//cdn.ckeditor.com/4.5.9/standard/ckeditor.js"></script>

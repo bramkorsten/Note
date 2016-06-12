@@ -1,23 +1,15 @@
 <?php
 error_reporting(0);
 ini_set('display_errors', 'Off');
-  if(isset($access) && $access){
-    //File can be opened
-  }
-  else {
-   // User has no direct access to the file
-    header("HTTP/1.1 403 Forbidden");
-    exit;
-  }
 
 // Require the config file. this file reads the database info from a JSON file
-require_once('config.php');
+require_once('config/config.php');
 // The message if it needs to popup
 $error = "none";
 // Setup the connection using the info from the config
 $conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
 // Set the redirect URL
-$redirecturl = 'adminpanel.php';
+$redirecturl = 'index.php';
 // If a edit is reffered, store it when the user needs to login first
 // We do this to check if the user already edited the post
 // This way we prevent loops

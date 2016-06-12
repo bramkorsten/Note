@@ -8,15 +8,15 @@
     </h2>
     <p>
       Start by adding a post right 
-      <a href="adminpanel.php?ref=postcreator">here</a>!
+      <a href="index.php?ref=postcreator">here</a>!
     </p>
     <p>
       Look at 
-      <a href="adminpanel.php?ref=allposts">all Posts</a>
+      <a href="index.php?ref=allposts">all Posts</a>
     </p>
     <p>
       Add a new account 
-      <a href="adminpanel.php?ref=usercreation">here</a>!
+      <a href="index.php?ref=usercreation">here</a>!
     </p>
   </div>
   
