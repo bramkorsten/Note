@@ -1,4 +1,4 @@
-# Watermelone
+# Note
 ###PHP based CMS
 Watermelone is a simple lightweight php based cms, capable of managing your posts with a powerfull editor. It can be installed using 1 simple script, and has a built in update function.
 The CMS can handle multiple user accounts and post types, and will soon have comments built in!
