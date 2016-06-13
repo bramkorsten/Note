@@ -2,6 +2,12 @@
 
 check it out here: http://bramkorsten.io/examples/note/
 
+Username: test
+
+Password: N0teCMS
+
+(user creation has been disabled, but you can still submit it)
+
 ###PHP based CMS
 Note is a simple lightweight php based cms, capable of managing your posts with a powerful editor. It can be installed using one simple script, and has a build-in update function.
 Note can handle multiple user accounts and post types, and will soon have comments!
