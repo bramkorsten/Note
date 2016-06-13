@@ -10,8 +10,8 @@
     if ( mysqli_num_rows($result) > 0 ) {
      while ( $a = mysqli_fetch_assoc($result) ) {
         $title = stripslashes($a['postTitle']);
-        $bodytext = stripslashes($a['postData']);
-        $bodytext = str_replace(array('<div>', '</div>'), array('<span>', '</span>'), $bodytext);
+        //$bodytext = stripslashes($a['postData']);
+        //$bodytext = str_replace(array('<div>', '</div>'), array('<span>', '</span>'), $bodytext);
         $postID = $a['postID'];
         echo <<<ENTRY_DISPLAY
 
@@ -19,7 +19,7 @@
         <h3>
           $title
         </h3>
-        <p class="allposts-post-body">$bodytext</p>
+        <div class="allposts-post-body"></div>
         <div class="allposts-edit-link"><a href="index.php?edit=$postID">edit</a></div>
       </div>
   
