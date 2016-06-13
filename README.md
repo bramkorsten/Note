@@ -1,4 +1,7 @@
 # Note
+
+check it out here: http://bramkorsten.io/examples/note/
+
 ###PHP based CMS
 Note is a simple lightweight php based cms, capable of managing your posts with a powerful editor. It can be installed using one simple script, and has a build-in update function.
 Note can handle multiple user accounts and post types, and will soon have comments!
