@@ -26,6 +26,7 @@
           unset($_SESSION['editID']);
         }
         else if (($error == 'postsubmitted') || ($error == 'postsubmitfailed') || ($_GET["ref"] == 'postsubmitcancelled') || ($_SESSION['error'] == 'postnonexist')) {
+          require('ui/update-notif.php');
           require('ui/verification.php');
           require('ui/adminmenu.php');
         }
@@ -38,6 +39,7 @@
         }
         
         else if (isset($_GET["ref"]) == false) {
+          require('ui/update-notif.php');
           require('ui/adminmenu.php');
         }
       }
