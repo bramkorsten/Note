@@ -157,9 +157,9 @@ $conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
 }
 
 else if (isset($_POST['dbsubmit'])) {
-	$metadata = file_get_contents('http://bramkorsten.io/downloads/note/metadata.json');
-	$metadecode = json_decode($metadata, true);
-	$newversion = $metadecode['core']['version'];
+	ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)'); 
+	$metadata = json_decode(file_get_contents('https://api.github.com/repos/Exentory/Note-CMS/releases/latest'), true);
+	$newversion = $metadata['tag_name'];
   $config = fopen("note/config/config.json", "w") or die('Could not build config file');
   $database_info = array();
   $info = array('server'=> $_POST['dbhost'], 'username'=> $_POST['dbuser'], 'data'=> $_POST['db'], 'password'=> $_POST['dbpass']);

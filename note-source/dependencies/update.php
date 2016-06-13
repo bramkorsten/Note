@@ -36,7 +36,7 @@ if ($_GET['deploy'] == 'user') {
   if (!mysqli_query($conn, $sql)) {
     die('Invalid query: ' . mysqli_error($conn));
   }
-  unlink("../update.zip");
+  unlink("../../update.zip");
 		// Redirect
 		header("Location: ../index.php");
 		header("HTTP/1.1 303 See Other");
@@ -45,10 +45,10 @@ if ($_GET['deploy'] == 'user') {
 
 else if (isset($_GET['install']) && $_GET['install'] == true) {
     /* Source File URL */
-  $remote_file_url = 'http://bramkorsten.io/downloads/note/update.zip';
+  $remote_file_url = 'http://bramkorsten.io/downloads/note/note.zip';
 
   /* New file name and path for this file */
-  $local_file = '../update.zip';
+  $local_file = '../../update.zip';
 
   /* Copy the file from source url to server */
   $copy = copy( $remote_file_url, $local_file );
@@ -79,9 +79,9 @@ else {
 }
 
 if ($installed) {
-	$metadata = file_get_contents('http://bramkorsten.io/downloads/note/metadata.json');
-	$metadecode = json_decode($metadata, true);
-	$newversion = $metadecode['core']['version'];
+	ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)'); 
+	$metadata = json_decode(file_get_contents('https://api.github.com/repos/Exentory/Note-CMS/releases/latest'), true);
+	$newversion = $metadata['tag_name'];
 	$jsonString = file_get_contents('../config/config.json');
 	$data = json_decode($jsonString, true);
 	$data['core']['version'] = $newversion;
