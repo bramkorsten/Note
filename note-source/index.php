@@ -19,30 +19,30 @@
   <body>
     <?php
       if ($_SESSION["admin"]) {
-        require('adminbar.php');
+        require('ui/adminbar.php');
         
         if (($_GET["ref"] == 'postcreator') || (isset($_GET["edit"]))) {
-          require('editor.php');
+          require('ui/editor.php');
           unset($_SESSION['editID']);
         }
         else if (($error == 'postsubmitted') || ($error == 'postsubmitfailed') || ($_GET["ref"] == 'postsubmitcancelled') || ($_SESSION['error'] == 'postnonexist')) {
-          require('verification.php');
-          require('adminmenu.php');
+          require('ui/verification.php');
+          require('ui/adminmenu.php');
         }
         else if ($_GET["ref"] == 'usercreation') {
-          require('newaccount.php');
+          require('ui/newaccount.php');
         }
         
         else if ($_GET["ref"] == 'allposts') {
-          require('posts.php');
+          require('ui/posts.php');
         }
         
         else if (isset($_GET["ref"]) == false) {
-          require('adminmenu.php');
+          require('ui/adminmenu.php');
         }
       }
       else {
-        require('loginform.php');
+        require('ui/loginform.php');
       }
     ?>
   </body>
