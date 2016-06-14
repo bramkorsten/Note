@@ -459,3 +459,11 @@ body {
 .hidden {
   display: none;
 }
+
+.noted {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background: url("../img/noteblack.svg");
+  opacity: 0.5;
+}

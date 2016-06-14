@@ -249,7 +249,7 @@ function display_public($connection, $post = NULL) {
 				$title
 			</h1>
 				$bodytext
-		  <div class="post-date">$nUpdated - <a href="../watermelone/adminpanel.php?edit=$postID">edit</a></div>
+		  <div class="post-date"><div class="noted"></div> on $nUpdated - <a href="../watermelone/adminpanel.php?edit=$postID">edit</a></div>
 			<div class="scribble"></div>
     </article>
   
