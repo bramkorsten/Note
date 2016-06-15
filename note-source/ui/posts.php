@@ -4,15 +4,21 @@
       All Posts
     </h2>
     <?php 
-    $sql = "SELECT * FROM cmsData ORDER BY postTime";
-    $result = mysqli_query($conn, $sql);
+    
+    try {
+			$sql = $conn->prepare("SELECT * FROM cmsData ORDER BY postTime");
+			$sql->bindParam(":id", $post);
+			$sql->execute();
+		}
+		catch (PDOException $e) {
+			echo "An error has occurred: " . $e->getMessage();
+		}
 
-    if ( mysqli_num_rows($result) > 0 ) {
-     while ( $a = mysqli_fetch_assoc($result) ) {
-        $title = stripslashes($a['postTitle']);
-        //$bodytext = stripslashes($a['postData']);
-        //$bodytext = str_replace(array('<div>', '</div>'), array('<span>', '</span>'), $bodytext);
-        $postID = $a['postID'];
+    if ($sql->rowCount() > 0) {
+     try {
+				foreach ($sql->fetchAll() as $row) {
+        $title = stripslashes($row['postTitle']);
+        $postID = $row['postID'];
         echo <<<ENTRY_DISPLAY
 
       <div class="allposts-post">
@@ -24,7 +30,11 @@
       </div>
   
 ENTRY_DISPLAY;
+        }
       }
+    catch (PDOException $e) {
+			echo "An error has occurred: " . $e->getMessage();
+		}
     }
     ?>
   </div>

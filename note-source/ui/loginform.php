@@ -1,7 +1,7 @@
 <div class="login-wrapper">
   <div class="note"></div>
   <div class="message loginmessage 
-              <?php if(isset($error)){
+              <?php if(isset($error) && ($error != "none")){
   echo ('visible');} 
               else {
                 echo ('hidden');} 
@@ -28,7 +28,7 @@
   </form>
   
   <p class="powered">
-    <i>Powered by Note<br>
+    <i>Powered by Note - <?php echo($version); ?><br>
       Copyright © 2016 - Bram Korsten</i>
   </p>
   <audio id="audiomelone">

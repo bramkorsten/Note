@@ -18,8 +18,20 @@
 
   <body>
     <?php
-      if ($_SESSION["admin"]) {
+      if (isset($_SESSION["admin"]) && $_SESSION["admin"]) {
         require('ui/adminbar.php');
+        
+        if (!isset($_GET["ref"])) {
+          $_GET["ref"] = NULL;
+        }
+        
+        if (!isset($error)) {
+          $error = NULL;
+        }
+        
+        if (!isset($_SESSION['error'])) {
+          $_SESSION['error'] = NULL;
+        }
         
         if (($_GET["ref"] == 'postcreator') || (isset($_GET["edit"]))) {
           require('ui/editor.php');
