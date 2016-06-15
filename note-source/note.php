@@ -6,6 +6,7 @@ ini_set('display_errors', 'On');
 require_once('config/config.php');
 // The message if it needs to popup
 $error = "none";
+$version = $s_CoreVersion;
 // Setup the connection using the info from the config
 try {
 	$conn = new PDO("mysql:host=$s_Server;dbname=$s_Database", "$s_Username", "$s_Password");

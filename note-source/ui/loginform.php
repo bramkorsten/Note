@@ -28,7 +28,7 @@
   </form>
   
   <p class="powered">
-    <i>Powered by Note<br>
+    <i>Powered by Note - <?php echo($version); ?><br>
       Copyright © 2016 - Bram Korsten</i>
   </p>
   <audio id="audiomelone">
