@@ -46,7 +46,7 @@ if(isset($_POST['user']) && isset($_POST['pass'])) {
     $_SESSION["error"] = 'Invalid Credentials, please try again!';
   }
   // Verify the password, and if it's correct, set the admin session
-  if (password_verify( strip_tags($_POST['pass']), $hashedpassword))
+  if (password_verify( $_POST['pass'], $hashedpassword))
   {
     $_SESSION["admin"] = true;
   }
@@ -62,7 +62,7 @@ if(isset($_POST['user']) && isset($_POST['pass'])) {
 // If a new user is submitted
 else if (isset($_POST['usersubmit'])) {
   $username = strip_tags($_POST['newuser']);
-  $password = strip_tags($_POST['newpass']);
+  $password = $_POST['newpass'];
   $email = strip_tags($_POST['newemail']);
   // Hash the new password
   $hashedpassword = password_hash($password, PASSWORD_BCRYPT);
