@@ -110,7 +110,6 @@ else if(isset($_POST['post-submit'])) {
 		// And a unique ID for the post
     $created = time();
     $uniqid = uniqid();
-		
 		try {
 			$sql = $conn->prepare("INSERT INTO cmsData (postID, postTitle, postData, postTime) VALUES( :id , :title , :data , :time )");
 			$sql->bindParam(":id", $uniqid);
@@ -126,13 +125,28 @@ else if(isset($_POST['post-submit'])) {
 			$_SESSION["error"] = 'postsubmitfailed';
 		}
 		$sql->closeCursor();
+		
+		if (!empty($_POST['metatags'])) {
+			$metatags = explode(',',$_POST['metatags']);
+			foreach($metatags as $tag) {
+				try {
+					$sql = $conn->prepare("INSERT INTO cmstags (postID, tag) VALUES( :id , :tag)");
+					$sql->bindParam(":id", $uniqid);
+					$sql->bindParam(":tag", $tag);
+					$sql->execute();
+				}
+				catch (PDOException $e) {
+					echo "An error has occurred: " . $e->getMessage();
+				}
+			}
+		}
   }
   else {
 		// Set the error to fail!
     $_SESSION["error"] = 'postsubmitfailed';
   }
 	// Redirect
-  header("Location: $redirecturl");
+ 	header("Location: $redirecturl");
   header("HTTP/1.1 303 See Other");
   die("redirecting");
 }
