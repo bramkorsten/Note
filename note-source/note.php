@@ -224,6 +224,18 @@ if(isset($_GET['edit'])) {
         $editbody = $row["postData"];
         $editbody = str_replace('"', "'", $editbody);
 			}
+			$sql->closeCursor();
+			$sql = $conn->prepare("SELECT `tag` FROM `cmstags` WHERE `postID` = :id ");
+			$sql->bindParam(":id", $editID);
+			$sql->execute();
+			$tagsarray = array();
+			$rowcount = 0;
+			foreach ($sql->fetchAll() as $row) {
+				$tagsarray[$rowcount] = $row["tag"];
+				$rowcount++;
+			}
+			$sql->closeCursor();
+			$edittags = implode(',', $tagsarray);
 		}
 		catch (PDOException $e) {
 			echo "An error has occurred: " . $e->getMessage();
