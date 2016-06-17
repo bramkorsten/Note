@@ -287,9 +287,9 @@ if (isset($_SESSION['error'])) {
 // The function needs a connection, which can just be the standard
 // $conn, and can have a postID
 // If a postID is specified, it will only display that post
-function display_public($connection, $post = NULL) {
+function display_public($connection, $post = NULL, $tag = NULL) {
 	$entry_display;
-  if ($post == NULL) {
+  if (($post == NULL) && ($tag == NULL)) {
 		// Set sql for all posts
 		try {
 			$sql = $connection->prepare("SELECT * FROM cmsData ORDER BY postTime");
@@ -299,12 +299,35 @@ function display_public($connection, $post = NULL) {
 			echo "An error has occurred: " . $e->getMessage();
 		}
   }
-  else {
+  else if ($post != NULL) {
 		// Set sql for single post
 		try {
 			$sql = $connection->prepare("SELECT * FROM cmsData WHERE `postID` = :id ORDER BY postTime");
 			$sql->bindParam(":id", $post);
 			$sql->execute();
+		}
+		catch (PDOException $e) {
+			echo "An error has occurred: " . $e->getMessage();
+		}
+  }
+	else if ($tag != NULL) {
+		// Set sql for single tag
+		try {
+			$sql = $connection->prepare("SELECT * FROM cmstags WHERE `tag` = :tag ");
+			$sql->bindParam(":tag", $tag);
+			$sql->execute();
+			if ($sql->rowCount() > 0) {
+				$postarray = array();
+				$rowcount = 0;
+				foreach ($sql->fetchAll() as $row) {
+					$postarray[$rowcount] = "'" . $row['postID'] . "'";
+					$rowcount++;
+				}
+				$sql->closeCursor();
+				$posts = (string)implode(', ', $postarray);
+				$sql = $connection->prepare("SELECT * FROM cmsData WHERE `postID` IN ( $posts )");
+				$sql->execute();
+			}
 		}
 		catch (PDOException $e) {
 			echo "An error has occurred: " . $e->getMessage();
@@ -334,14 +357,19 @@ function display_public($connection, $post = NULL) {
     </article>
   
 ENTRY_DISPLAY;
+					
+						// Return the posts, which are all saves in the variable
+  echo $entry_display;
       	}
 			}
 			catch (PDOException $e) {
 					echo "An error has occurred: " . $e->getMessage();
 			}
+			$sql->closeCursor();
     }
-	// Return the posts, which are all saves in the variable
-  return $entry_display;
+	else {
+		echo "There are no posts to show!";
+	}
 }
 
 ?>
