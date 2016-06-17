@@ -96,7 +96,7 @@
 
     function savePartialInput(value) {
       if (typeof value !== 'string' && !Array.isArray(value)) {
-        value = base.input.value || input.value;
+        value = base.input.value;
       }
       if (addTag(value) !== false) {
         base.input.value = '';
@@ -196,7 +196,7 @@
     base.addEventListener('touchstart', refocus);
     base.setValue = setValue;
     base.getValue = getValue;
-    savePartialInput();
+    savePartialInput(input.value);
   }
   tagsInput.enhance = tagsInput.tagsInput = tagsInput;
 });
