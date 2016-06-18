@@ -1,0 +1,1 @@
+This directory will soon hold the source of the Note administrator app for android.
