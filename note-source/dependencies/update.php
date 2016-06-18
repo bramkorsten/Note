@@ -75,7 +75,13 @@ else if (isset($_GET['install']) && $_GET['install'] == true) {
 }
 
 else {
-  echo("click <a href='update.php?install=true'>here</a> to update to the latest version of Note.");
+	ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)'); 
+	$metadata = json_decode(file_get_contents('https://api.github.com/repos/Exentory/Note-CMS/releases/latest'), true);
+	$newversion = $metadata['tag_name'];
+	$jsonString = file_get_contents('../config/config.json');
+	$data = json_decode($jsonString, true);
+	$oldversion = $data['core']['version'];
+  require_once("update_front.php");
 }
 
 if ($installed) {

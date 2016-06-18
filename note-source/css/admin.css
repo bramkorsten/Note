@@ -17,6 +17,31 @@ body {
   margin-top: 100px;
 }
 
+.updateversion {
+  font-family: Georgia;
+  font-size: 2em;
+  color: #2c3e50;
+  text-align: center;
+  margin: 0;
+}
+
+.updatetitle {
+  font-family: Georgia;
+  font-size: 0.8em;
+  color: #bdc3c7;
+  text-align: center;
+}
+.container-two {
+  width: 50%;
+  float: left;
+  margin: 50px 0;
+  box-sizing: border-box;
+}
+
+.container-two:first-child {
+  border-right: 1px solid #ecf0f1;
+}
+
 .note {
   height: 60px;
   background-size: contain;
@@ -86,9 +111,24 @@ body {
   margin: 25px 5% 25px 0;
 }
 
-.loginbutton:hover {
+.loginbutton:hover, .updatebutton:hover {
   background-color: #2cc16a;
   cursor: pointer;
+}
+
+.updatebutton {
+  font-family: 'Georgia';
+  font-size: 15px;
+  line-height: 1;
+  padding: 12.5px 20px;
+  background-color: #2ecc71;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+  box-shadow: 0 1px 3px rgba(0,0,0,.13);
+  border: none;
+  color: #ffffff;
+  margin: 25px auto;
+  text-decoration: none;
+  display: table;
 }
 
 .quill-wrapper {
