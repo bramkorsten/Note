@@ -10,7 +10,9 @@
     <textarea name="post-data" id="editor1" rows="10" cols="80">
                 <?php if(isset($_GET['edit'])) {echo ($editbody);} else {echo ('<p>If you have something to say, <b>say it</b>!</p>');}?>
             </textarea>
+            <input name="metatags" type="tags" value="<?php if(isset($_GET['edit'])) {echo ($edittags);} ?>" placeholder="metatags">
             <script>
+              [].forEach.call(document.querySelectorAll('input[type="tags"]'), tagsInput);
                 // Replace the <textarea id="editor1"> with a CKEditor
                 // instance, using default configuration.
                 CKEDITOR.replace( 'editor1' );

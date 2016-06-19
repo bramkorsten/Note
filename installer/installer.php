@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 error_reporting(0);
 ini_set('display_errors', 'Off');
 if ($_GET['deploy'] == 'user') {
@@ -32,6 +32,13 @@ if ($_GET['deploy'] == 'user') {
           `deviceID` varchar(255) DEFAULT NULL,
           `androidID` varchar(255) NOT NULL,
           UNIQUE KEY `androidID` (`androidID`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+  if (!mysqli_query($conn, $sql)) {
+    die('Invalid query: ' . mysqli_error($conn));
+  }
+	$sql = "CREATE TABLE IF NOT EXISTS `cmstags` (
+          `postID` varchar(13) NOT NULL,
+          `tag` varchar(255) DEFAULT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
   if (!mysqli_query($conn, $sql)) {
     die('Invalid query: ' . mysqli_error($conn));

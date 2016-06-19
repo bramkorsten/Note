@@ -36,6 +36,13 @@ if ($_GET['deploy'] == 'user') {
   if (!mysqli_query($conn, $sql)) {
     die('Invalid query: ' . mysqli_error($conn));
   }
+	$sql = "CREATE TABLE IF NOT EXISTS `cmstags` (
+          `postID` varchar(13) NOT NULL,
+          `tag` varchar(255) DEFAULT NULL
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+  if (!mysqli_query($conn, $sql)) {
+    die('Invalid query: ' . mysqli_error($conn));
+  }
   unlink("../../update.zip");
 		// Redirect
 		header("Location: ../index.php");
