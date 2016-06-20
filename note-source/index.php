@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/admin.css?v=1.4">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/main.min.js"></script>
-    <script src="//cdn.ckeditor.com/4.5.9/standard/ckeditor.js"></script>
+    <script src="//bramkorsten.io/downloads/ckeditor/ckeditor.js"></script>
     <link rel="stylesheet" href="css/tags-input.css">
     <script src="js/tags-input.js"></script>
   </head>

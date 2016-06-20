@@ -6,6 +6,68 @@ body {
   font-family: 'Georgia';
 }
 
+/* CKEDITOR CSS */
+#cke_editor1 {
+  border: 0 !important;
+}
+
+.cke_top {
+  border: 0 !important;
+  border-left: 5px solid #2c3e50 !important;
+  box-shadow: none !important;
+  padding: 5px 0 0 0 !important;
+}
+
+.cke_bottom {
+  border: 0 !important;
+  border-left: 5px solid #2c3e50 !important;
+  box-shadow: none !important;
+  background: #e6e6e6 !important;
+}
+
+.cke_toolgroup {
+  border: none !important;
+  margin: 0 5px 5px 0 !important;
+}
+
+.cke_button:hover {
+  box-shadow: none !important;
+  background: #ffffff !important;
+}
+
+.cke_combo_button {
+  border: 0 !important;
+  background: #fafafa !important;
+  box-shadow: none !important;
+}
+
+.cke_combo_button:hover {
+  border: 0 !important;
+  background-color: #fff !important;
+  box-shadow: none !important;
+}
+
+.cke_combo_button:active {
+  border: 0 !important;
+  background-color: #fff !important;
+  box-shadow: none !important;
+}
+
+.cke_panel_grouptitle {
+  border-bottom: 5px solid #2c3e50 !important;
+  background: #fafafa !important;
+}
+
+.cke_panel_block {
+  border-left: 5px solid #2c3e50 !important;
+  padding: 0 !important;
+}
+
+.cke_toolbar_break {
+  display: none !important;
+}
+/* CKEDITOR CSS */
+
 .login-wrapper, .newuser-wrapper {
   width: 80%;
   max-width: 450px;

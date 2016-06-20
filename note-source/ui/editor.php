@@ -10,15 +10,12 @@
     <textarea name="post-data" id="editor1" rows="10" cols="80">
                 <?php if(isset($_GET['edit'])) {echo ($editbody);} else {echo ('<p>If you have something to say, <b>say it</b>!</p>');}?>
             </textarea>
-            <input name="metatags" type="tags" value="<?php if(isset($_GET['edit'])) {echo ($edittags);} ?>" placeholder="metatags">
-            <script>
-              [].forEach.call(document.querySelectorAll('input[type="tags"]'), tagsInput);
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace( 'editor1' );
-            </script>
-    <!--<input class="post-data-node" type="hidden" name="post-data" value="<?php //if(isset($_GET['edit'])) {echo ($editbody);} else {echo ('<p>If you have something to say, <b>say it</b>!</p>');}?>">
-   --> <input class="post-submit-input" type="submit" name="<?php if(isset($_GET['edit'])) {echo ('edit-submit');} else {echo ('post-submit');}?>" value="<?php if(isset($_GET['edit'])) {echo ('Update');} else {echo ('Publish');}?>">
+    <input name="metatags" type="tags" value="<?php if(isset($_GET['edit'])) {echo ($edittags);} ?>" placeholder="metatags">
+    <script>
+      [].forEach.call(document.querySelectorAll('input[type="tags"]'), tagsInput);
+        CKEDITOR.replace( 'editor1' );
+    </script>
+    <input class="post-submit-input" type="submit" name="<?php if(isset($_GET['edit'])) {echo ('edit-submit');} else {echo ('post-submit');}?>" value="<?php if(isset($_GET['edit'])) {echo ('Update');} else {echo ('Publish');}?>">
     <a class="post-cancel-input" href="index.php?ref=postsubmitcancelled">Cancel</a>
     <?php 
     if(isset($_GET['edit'])) {
@@ -26,9 +23,4 @@
     }
     ?>
   </form>
-  <script>
-    editor.on('text-change', function(delta, source) {
-      $(".post-data-node").attr("value", editor.getHTML());
-    });
-  </script>
 </div>
