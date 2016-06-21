@@ -29,7 +29,7 @@
   
   <p class="powered">
     <i>Powered by Note - <?php echo($version); ?><br>
-      Copyright © 2016 - Bram Korsten</i>
+      By Bram Korsten</i>
   </p>
   <audio id="audiomelone">
   <source src="video/watermelone.ogg" type="audio/ogg">

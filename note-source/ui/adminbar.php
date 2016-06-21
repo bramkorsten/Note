@@ -1,16 +1,13 @@
 <div class="adminbar-wrapper">
-  <ul class="quick-menu-wrapper">
-    <li class="quick-menu">
-      <a>Quick Menu</a>
-      <ul>
-        <li><a href="index.php">Home</a></li>
-        <li><a href="index.php?ref=postcreator">New Post</a></li>
-        <li><a href="index.php?ref=usercreation">New User</a></li>
-        <li><a href="index.php?ref=allposts">All Posts</a></li>
-      </ul>
-    </li>
-  </ul>
-  <form action="index.php" method="POST">
-    <input class="logout-button" type="submit" value="Logout" name="logout">
-  </form>
+    <a href="index.php">Home</a>
+    <a href="index.php?ref=postcreator">New Post</a>
+    <a href="index.php?ref=usercreation">New User</a>
+    <a href="index.php?ref=allposts">All Posts</a>
+    <a href="index.php?logout">Logout</a>
+  <p class="footer">
+    <i class="note_small"></i>
+    <i>Powered by Note - <?php echo($version); ?><br>
+      By Bram Korsten</i>
+  </p>
 </div>
+<a class="menu-button"></a>

@@ -19,6 +19,8 @@
   </head>
 
   <body>
+    <div class="wrap">
+    <div class="body_wrapper">
     <?php
       if (isset($_SESSION["admin"]) && $_SESSION["admin"]) {
         require('ui/adminbar.php');
@@ -61,6 +63,8 @@
         require('ui/loginform.php');
       }
     ?>
+  </div>
+  </div>
   </body>
   
 </html>

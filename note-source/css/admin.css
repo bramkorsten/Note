@@ -3,7 +3,12 @@
 body {
   background-color: #f1f1f1;
   height: auto;
+  margin: 0;
   font-family: 'Georgia';
+}
+
+.wrap {
+  overflow-x: hidden;
 }
 
 /* CKEDITOR CSS */
@@ -67,6 +72,58 @@ body {
   display: none !important;
 }
 /* CKEDITOR CSS */
+
+.body_wrapper {
+  float: right;
+  width: 100%;
+  transition: all 0.3s ease-out;
+  margin-top: 50px;
+}
+
+.body_wrapper.menu-open {
+  float: right;
+  width: calc(100% - 300px);
+}
+
+.menu-open .adminbar-wrapper {
+  left: 0;
+}
+
+.adminbar-wrapper {
+  transition: all 0.3s ease-out;
+  position: absolute;
+  width: 300px;
+  height: calc(100% - 100px);
+  top: 0;
+  left: -300px;
+  z-index: 999;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+  box-shadow: 0 1px 3px rgba(0,0,0,.13);
+  margin: 50px 0;
+}
+
+.menu-button {
+  transition: all 0.3s ease-out;
+  background: url("../img/noteblack.svg");
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  margin: 5px;
+  opacity: 0.2;
+}
+
+.menu-open .menu-button {
+  margin-left: 255px;
+}
+
+.menu-button:hover {
+  opacity: 1;
+}
 
 .login-wrapper, .newuser-wrapper {
   width: 80%;
@@ -228,7 +285,7 @@ body {
   width: 80%;
   max-width: 650px;
   min-width: 320px;
-  margin: 100px auto 0;
+  margin: 0 auto;
 }
 
 .post-title-input {
@@ -291,87 +348,46 @@ body {
   height: auto !important;
 }
 
-.adminbar-wrapper {
-  position: fixed;
+.adminbar-wrapper a {
+  float: left;
   width: 100%;
-  height: 40px;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  background-color: #2c3e50;
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
-  box-shadow: 0 1px 3px rgba(0,0,0,.13);
-}
-
-.logout-button {
-  position: absolute;
+  padding: 12.5px 0;
+  text-align: center;
+  border-bottom: 1px solid #ecf0f1;
   font-family: 'Georgia';
   font-size: 15px;
-  padding: 11.5px 25px 11.5px 20px;
-  color: #ffffff;
-  background-color: #2c3e50;
-  top: 0;
-  right: 0;
-  border: none;
-  height: 40px;
-  border-left: 5px solid #e74c3c;
-}
-
-.logout-button:hover {
-  background-color: #e74c3c;
-  border-left: 5px solid #e74c3c;
-  cursor: pointer;
-}
-
-.quick-menu-wrapper {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-family: 'Georgia';
-  color: #fff;
-}
-
-.quick-menu {
-  height: 40px;
-  overflow: hidden;
-  display: inline-block;
-}
-
-.quick-menu:hover {
-  height: auto;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.quick-menu a {
-  font-size: 15px;
-  padding: 11.5px 25px 11.5px 20px;
-  display: block;
-}
-
-.quick-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  background-color: #34495e;
-}
-
-.quick-menu ul li a {
-  list-style: none;
-  margin: 0;
-  padding: 11.5px 25px 11.5px 20px;
   text-decoration: none;
-  color: #fff;
+  color: #444;
 }
 
-.quick-menu ul li a:hover {
-  color: #e74c3c;
+.adminbar-wrapper a:hover {
+  background-color: #2c3e50;
+  color: #ffffff;
+}
+
+.adminbar-wrapper .footer {
+  text-align: center;
+  font-size: 11px;
+  font-family: Georgia;
+  color: #777;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.adminbar-wrapper .footer .note_small {
+  background: url("../img/noteblack.svg");
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  opacity: 0.2;
+  display: block;
 }
 
 .admin-menu-wrapper, .allposts-wrapper {
   height: auto;
   width: 80%;
-  margin: 100px auto 0;
+  margin: 0 auto;
   max-width: 650px;
   min-width: 320px;
 }
@@ -381,6 +397,10 @@ body {
   background-color: #ffffff;
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
   box-shadow: 0 1px 3px rgba(0,0,0,.13);
+  margin-bottom: 25px;
+}
+
+.admin-container:last-child {
   margin-bottom: 25px;
 }
 
@@ -504,7 +524,7 @@ body {
   width: 80%;
   max-width: 650px;
   min-width: 320px;
-  margin: 100px auto -100px;
+  margin: 0 auto;
 }
 
 .loginmessage {
@@ -583,4 +603,10 @@ body {
   border-left: 5px solid #2c3e50;
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
   box-shadow: 0 1px 3px rgba(0,0,0,.13);
+}
+
+@media only screen and (max-width: 700px) {
+  .body_wrapper.menu-open {
+    margin-right: -50px;
+  }
 }

@@ -31,7 +31,7 @@ if(isset($_GET['logout'])) {
    header("Location: $redirecturl");
    header("HTTP/1.1 303 See Other");
    die("redirecting");
-}
+	}
 
 // If the user wants to login, check the database
 if(isset($_POST['user']) && isset($_POST['pass'])) {
