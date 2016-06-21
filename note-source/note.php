@@ -25,7 +25,7 @@ if(isset($_SESSION['editID'])) {
   }
 
 // If the user posts to logout, exit the admin session, and set the message
-if(isset($_POST['logout'])) {
+if(isset($_GET['logout'])) {
    $_SESSION["admin"] = false;
    $_SESSION['error'] = 'You have been logged out.';
    header("Location: $redirecturl");
