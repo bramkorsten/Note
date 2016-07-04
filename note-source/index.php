@@ -8,7 +8,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#ed1c24" /><!--#20C520 #ed1c24-->
+    <meta name="theme-color" content="#2c3e50" />
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="icon" href="img/favicon.ico">
     <title>Note - Adminpanel</title>
     <link rel="stylesheet" href="css/admin.css?v=1.4">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
