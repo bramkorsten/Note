@@ -44,6 +44,8 @@ if ($_GET['deploy'] == 'user') {
     die('Invalid query: ' . mysqli_error($conn));
   }
   unlink("../../update.zip");
+	$_SESSION['admin'] = false;
+	$_SESSION['error'] = 'Update Succesful!';
 		// Redirect
 		header("Location: ../index.php");
 		header("HTTP/1.1 303 See Other");
