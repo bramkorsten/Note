@@ -1,6 +1,6 @@
 <?php
-error_reporting(0);
-ini_set('display_errors', 'Off');
+error_reporting(1);
+ini_set('display_errors', 'On');
 if ($_GET['deploy'] == 'user') {
 	require_once('note/config/config.php');
 	$conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
@@ -91,7 +91,7 @@ else if (isset($_GET['install']) && $_GET['install'] == true) {
   $remote_file_url = 'http://bramkorsten.io/downloads/note/note.zip';
 
   /* New file name and path for this file */
-  $local_file = 'installer.zip';
+  $local_file = 'note-installer.zip';
 
   /* Copy the file from source url to server */
   $copy = copy( $remote_file_url, $local_file );
@@ -119,6 +119,7 @@ else if (isset($_GET['install']) && $_GET['install'] == true) {
   if ($installed) {
     echo <<<DATABASE_FORM
 
+		<p>Please enter the details of your database connection.</p>
     <form action="installer.php" method="POST">
 			 <input type="text" name="db" value="database"><br>
        <input type="text" name="dbhost" value="localhost"><br>
@@ -152,10 +153,14 @@ $conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
   // Run the query
   if (!mysqli_query($conn, $sql)) {
     echo ('Invalid query: ' . mysqli_error($conn));
+		echo "something went wrong while registering the administrator account! <br>
+		Please ask the developer of Note for help, or check the github page.";
   }
 	else {
-		unlink("installer.zip");
-		unlink("installer.php");
+		unlink("note.zip");
+		unlink("note-installer.php");
+		$_SESSION['error'] = "We're all set! Welcome to Note!";
+		$_SESSION['admin'] = false;
 		// Redirect
 		header("Location: note/index.php");
 		header("HTTP/1.1 303 See Other");
@@ -177,6 +182,7 @@ else if (isset($_POST['dbsubmit'])) {
   if (!$chmoded){echo "Could not change the file permissions, you might be on localhost";}
   else {
     echo "Configuration file created! <br> Please note that the config file will not be safe if run on localhost! <br>
+		[note-path]/config/config.json should have permissions 0-6-0-0. <br>
     Click <a href='installer.php?deploy=user'>here</a> to continue setting up Note.";
   }
   fwrite($config, json_encode($database_info));
