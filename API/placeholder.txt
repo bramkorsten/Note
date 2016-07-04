@@ -1,1 +1,0 @@
-This directory will soon hold the API for the mobile app of Note.
