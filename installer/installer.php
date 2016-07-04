@@ -48,6 +48,7 @@ if ($_GET['deploy'] == 'user') {
   <html>
   <head>
   <link rel="stylesheet" href="note/css/admin.css?v=1.4">
+	<title>Note Installation</title>
   </head>
   <body>
   <div class="newuser-wrapper">
@@ -190,6 +191,62 @@ else if (isset($_POST['dbsubmit'])) {
 }
 
 else {
-  echo("click <a href='installer.php?install=true'>here</a> to download the latest version of Note");
+	echo "
+	<html>
+		<head>
+			<title>Note Installation</title>
+			<style>
+				body {
+					background-color: #f1f1f1;
+					height: auto;
+					margin: 0;
+					font-family: 'Georgia';
+				}
+				.login-wrapper, .newuser-wrapper {
+					width: 80%;
+					max-width: 450px;
+					min-width: 320px;
+					margin: 10% auto 25px;
+				}
+				.note-content-container {
+					background-color: #ffffff;
+					-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+					box-shadow: 0 1px 3px rgba(0,0,0,.13);
+					display: inline-block;
+					width: 100%;
+				}
+				
+				h2, p {
+					font-family: 'Georgia';
+					text-align: center;
+					padding: 20px 10px;
+				}
+				
+				h2 {
+					font-size: 3em;
+				}
+				
+				.note {
+					height: 60px;
+					background-size: contain;
+					background: url('http://bramkorsten.io/downloads/note/note/img/noteblack.svg');
+					margin-bottom: 25px;
+					width: 100%;
+					background-repeat: no-repeat;
+					background-position: center;
+				}
+			</style>
+		</head>
+		<body>
+		<div class='newuser-wrapper'>
+			<div class='note'></div>
+			<div class='note-content-container'>
+				<h2>Hello.</h2>
+				<p>click <a href='installer.php?install=true'>here</a> to download the latest version of Note</p>
+			</div>
+		</div>
+		</body>
+	</html>
+	";
 }
 ?>
