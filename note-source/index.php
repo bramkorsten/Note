@@ -42,26 +42,19 @@
         if (($_GET["ref"] == 'postcreator') || (isset($_GET["edit"]))) {
           require('ui/editor.php');
           unset($_SESSION['editID']);
-        }
-        else if (($error == 'postsubmitted') || ($error == 'postsubmitfailed') || ($_GET["ref"] == 'postsubmitcancelled') || ($_SESSION['error'] == 'postnonexist')) {
+        } else if (($error == 'postsubmitted') || ($error == 'postsubmitfailed') || ($_GET["ref"] == 'postsubmitcancelled') || ($_SESSION['error'] == 'postnonexist')) {
           require('ui/update-notif.php');
           require('ui/verification.php');
           require('ui/adminmenu.php');
-        }
-        else if ($_GET["ref"] == 'usercreation') {
+        } else if ($_GET["ref"] == 'usercreation') {
           require('ui/newaccount.php');
-        }
-        
-        else if ($_GET["ref"] == 'allposts') {
+        } else if ($_GET["ref"] == 'allposts') {
           require('ui/posts.php');
-        }
-        
-        else if (isset($_GET["ref"]) == false) {
+        } else if (isset($_GET["ref"]) == false) {
           require('ui/update-notif.php');
           require('ui/adminmenu.php');
         }
-      }
-      else {
+      } else {
         require('ui/loginform.php');
       }
     ?>

@@ -1,10 +1,10 @@
 <div class="login-wrapper">
   <div class="note"></div>
   <div class="message loginmessage 
-              <?php if(isset($error) && ($error != "none")){
-  echo ('visible');} 
+              <?php if (isset($error) && ($error != "none")) {
+  echo ('visible'); } 
               else {
-                echo ('hidden');} 
+                echo ('hidden'); } 
               ?>">
   <p>
     <?php echo ($error);

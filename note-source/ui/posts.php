@@ -6,17 +6,17 @@
     <?php 
     
     try {
-			$sql = $conn->prepare("SELECT * FROM cmsData ORDER BY postTime");
-			$sql->bindParam(":id", $post);
-			$sql->execute();
-		}
-		catch (PDOException $e) {
-			echo "An error has occurred: " . $e->getMessage();
-		}
+      $sql = $conn->prepare("SELECT * FROM cmsData ORDER BY postTime");
+      $sql->bindParam(":id", $post);
+      $sql->execute();
+    }
+    catch (PDOException $e) {
+      echo "An error has occurred: " . $e->getMessage();
+    }
 
     if ($sql->rowCount() > 0) {
-     try {
-				foreach ($sql->fetchAll() as $row) {
+      try {
+        foreach ($sql->fetchAll() as $row) {
         $title = stripslashes($row['postTitle']);
         $postID = $row['postID'];
         echo <<<ENTRY_DISPLAY
@@ -33,8 +33,8 @@ ENTRY_DISPLAY;
         }
       }
     catch (PDOException $e) {
-			echo "An error has occurred: " . $e->getMessage();
-		}
+      echo "An error has occurred: " . $e->getMessage();
+    }
     }
     ?>
   </div>
