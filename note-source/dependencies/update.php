@@ -1,7 +1,7 @@
 <?php
-error_reporting(0);
-ini_set('display_errors', 'Off');
-if ($_GET['deploy'] == 'user') {
+error_reporting(-1);
+ini_set('display_errors', 'On');
+if (isset($_GET['deploy']) && $_GET['deploy'] == 'user') {
 	require_once('../config/config.php');
 	$conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
   $sql = "CREATE TABLE IF NOT EXISTS `cmsData` (
@@ -84,19 +84,37 @@ else if (isset($_GET['install']) && $_GET['install'] == true) {
 }
 
 else {
-	ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)'); 
-	$metadata = json_decode(file_get_contents('https://api.github.com/repos/Exentory/Note-CMS/releases/latest'), true);
+	$url = 'https://api.github.com/repositories/60926745/releases/latest';
+	$cURL = curl_init();
+	curl_setopt($cURL, CURLOPT_URL, $url);
+	//curl_setopt($cURL, CURLOPT_HTTPGET, true);
+	curl_setopt($cURL, CURLOPT_USERAGENT,'NoteCMS');
+	curl_setopt($cURL, CURLOPT_HTTPHEADER, array(
+			'Content-Type: application/json',
+			'Accept: application/json'
+	));
+	curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
+	$result = curl_exec($cURL);
+	$metadata = json_decode($result, true);
+	curl_close($cURL);
 	$newversion = $metadata['tag_name'];
+	$_SESSION['newversion'] = $newversion;
+	require_once("Parsedown.php");
+	$Parsedown = new Parsedown();
+	$changelog = $Parsedown->text($metadata['body']);
 	$jsonString = file_get_contents('../config/config.json');
 	$data = json_decode($jsonString, true);
 	$oldversion = $data['core']['version'];
   require_once("update_front.php");
 }
 
-if ($installed) {
-	ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)'); 
-	$metadata = json_decode(file_get_contents('https://api.github.com/repos/Exentory/Note-CMS/releases/latest'), true);
-	$newversion = $metadata['tag_name'];
+if (isset($installed) && $installed) {
+	if (isset($_SESSION['newversion'])) {
+		$newversion = $_SESSION['newversion'];
+	}
+	else {
+		die("Error while getting data from stream. You might have opened this page by accident.");
+	}
 	$jsonString = file_get_contents('../config/config.json');
 	$data = json_decode($jsonString, true);
 	$data['core']['version'] = $newversion;

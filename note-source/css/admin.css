@@ -161,6 +161,35 @@ body {
   border-right: 1px solid #ecf0f1;
 }
 
+.changelog {
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  height: 200px;
+  transition: 0.3s all ease-in-out;
+  color: #2c3e50;
+  font-family: 'Georgia';
+}
+
+.changelog.closed {
+  height: 0;
+  overflow: hidden;
+}
+
+.changelogbutton {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  margin: 0;
+  color: #bdc3c7;
+}
+
+.changelogbutton a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .note {
   height: 60px;
   background-size: contain;

@@ -6,6 +6,8 @@
     <meta name="theme-color" content="#ed1c24" /><!--#20C520 #ed1c24-->
     <title>Update Note</title>
     <link rel="stylesheet" href="../css/admin.css?v=1.4">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="../js/main.min.js"></script>
   </head>
 
   <body>
@@ -27,6 +29,12 @@
           <h2 class="updateversion">
             <?php echo $newversion; ?>
           </h2>
+        </div>
+        <p class="changelogbutton">
+          <a id="changelogtrigger"><i>What's changed?</i></a>
+        </p>
+        <div class="changelog closed">
+          <?php echo $changelog; ?>
         </div>
         <a href='update.php?install=true' class="updatebutton">Update</a>
       </div>
