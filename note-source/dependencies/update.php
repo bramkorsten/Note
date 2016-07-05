@@ -87,7 +87,7 @@ else {
   $url = 'https://api.github.com/repositories/60926745/releases/latest';
   $cURL = curl_init();
   curl_setopt($cURL, CURLOPT_URL, $url);
-  //curl_setopt($cURL, CURLOPT_HTTPGET, true);
+  curl_setopt($cURL, CURLOPT_HTTPGET, true);
   curl_setopt($cURL, CURLOPT_USERAGENT,'NoteCMS');
   curl_setopt($cURL, CURLOPT_HTTPHEADER, array(
       'Content-Type: application/json',

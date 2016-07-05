@@ -50,7 +50,7 @@
           require('ui/newaccount.php');
         } else if ($_GET["ref"] == 'allposts') {
           require('ui/posts.php');
-        } else if (isset($_GET["ref"]) == false) {
+        } else if (isset($_GET["ref"]) === false) {
           require('ui/update-notif.php');
           require('ui/adminmenu.php');
         }

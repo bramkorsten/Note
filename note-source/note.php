@@ -288,7 +288,6 @@ if (isset($_SESSION['error'])) {
 // $conn, and can have a postID
 // If a postID is specified, it will only display that post
 function display_public($connection, $post = NULL, $tag = NULL) {
-  $entry_display;
   if (($post == NULL) && ($tag == NULL)) {
     // Set sql for all posts
     try {
@@ -332,8 +331,8 @@ function display_public($connection, $post = NULL, $tag = NULL) {
     catch (PDOException $e) {
       echo "An error has occurred: " . $e->getMessage();
     }
-  }
-	
+	}
+	$entry_display;
     if ($sql->rowCount() > 0) {
       // While there are posts, format them
       date_default_timezone_set('Europe/Amsterdam');
