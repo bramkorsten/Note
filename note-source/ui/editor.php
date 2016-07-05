@@ -2,10 +2,10 @@
   <form action="redirect.php" method="POST">
   <div class="editor-toolbar">
   <input class="post-title-input" type="text" name="post-title" value="<?php if(isset($_GET['edit'])) {echo ($edittitle);} else {echo ('Enter a title');}?>" onfocus="<?php 
-                                                                                                                                                                     if(!isset($_GET['edit']))
-                                                                                                                                                                     {
-                                                                                                                                                                       echo ("if(this.value==this.defaultValue)this.value='';");
-                                                                                                                                                                     }?>">
+                                                                                                                                                                      if(!isset($_GET['edit']))
+                                                                                                                                                                      {
+                                                                                                                                                                        echo ("if(this.value==this.defaultValue)this.value='';");
+                                                                                                                                                                      }?>">
   </div>
     <textarea name="post-data" id="editor1" rows="10" cols="80">
                 <?php if(isset($_GET['edit'])) {echo ($editbody);} else {echo ('<p>If you have something to say, <b>say it</b>!</p>');}?>
