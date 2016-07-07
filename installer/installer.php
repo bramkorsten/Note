@@ -91,7 +91,7 @@ if (isset($_GET['deploy']) && $_GET['deploy'] == 'user') {
 	if (version_compare(phpversion(), '5.3.7') < 0)
 	{
 		echo "
-		Failed!<br>Your php version is not compitable with Note!<br>The installer returned 0<br>";
+		Failed!<br>Your php version is not compatible with Note!<br>The installer returned 0<br>";
 		die("Process terminated!");
 	}
   $remote_file_url = 'http://bramkorsten.io/downloads/note/note.zip';
