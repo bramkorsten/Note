@@ -7,16 +7,27 @@ require_once('config/config.php');
 // The message if it needs to popup
 $error = "none";
 $version = $s_CoreVersion;
-// Setup the connection using the info from the config
-try {
+
+$conn = connect($s_Server, $s_Database, $s_Username, $s_Password);
+
+function connect($s_Server, $s_Database, $s_Username, $s_Password) {
+	try {
   $conn = new PDO("mysql:host=$s_Server;dbname=$s_Database", "$s_Username", "$s_Password");
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	}
+	catch (PDOException $e) {
+		echo "An error has occurred: " . $e->getMessage();
+	}
+	return $conn;
 }
-catch (PDOException $e) {
-  echo "An error has occurred: " . $e->getMessage();
+
+function redirect() {
+	$redirecturl = 'index.php';
+	header("Location: $redirecturl");
+	header("HTTP/1.1 303 See Other");
+	die("redirecting");
 }
-// Set the redirect URL
-$redirecturl = 'index.php';
+
 // If a edit is reffered, store it when the user needs to login first
 // We do this to check if the user already edited the post
 // This way we prevent loops
@@ -28,9 +39,7 @@ if(isset($_SESSION['editID'])) {
 if(isset($_GET['logout'])) {
     $_SESSION["admin"] = false;
     $_SESSION['error'] = 'You have been logged out.';
-    header("Location: $redirecturl");
-    header("HTTP/1.1 303 See Other");
-    die("redirecting");
+    redirect();
   }
 
 // If the user wants to login, check the database
@@ -60,9 +69,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
     $_SESSION["error"] = 'Invalid Credentials, please try again!';
   }
   $sql->closeCursor();
-  header("Location: $redirecturl");
-  header("HTTP/1.1 303 See Other");
-  die("redirecting");
+  redirect();
 }
 
 // If a new user is submitted
@@ -95,7 +102,7 @@ else if (isset($_POST['usersubmit'])) {
   }
   $sql->closeCursor();
   // Redirect
-  header("Location: $redirecturl");
+  redirect();
   header("HTTP/1.1 303 See Other");
   die("redirecting");
 }
@@ -146,9 +153,7 @@ else if(isset($_POST['post-submit'])) {
     $_SESSION["error"] = 'postsubmitfailed';
   }
   // Redirect
-    header("Location: $redirecturl");
-  header("HTTP/1.1 303 See Other");
-  die("redirecting");
+  redirect();
 }
 
 // If the user wants to edit a post
@@ -181,11 +186,7 @@ else if(isset($_POST['edit-submit'])) {
     // Set error
     $_SESSION["error"] = 'postsubmitfailed';
   }
-  
-    header("Location: $redirecturl");
-    header("HTTP/1.1 303 See Other");
-    die("redirecting");
-  
+  redirect();
 }
 
 // If the user did not enter all the login fields
@@ -195,10 +196,7 @@ else if (isset($_POST['user']) || isset($_POST['pass']))
   $_SESSION["error"] = 'Please fill in all fields';
   // Set the admin session to false for safety
   $_SESSION['admin'] = false;
-  // Redirect
-  header("Location: $redirecturl");
-  header("HTTP/1.1 303 See Other");
-  die("redirecting");
+  redirect();
 }
 
 // The main code for editing
@@ -215,9 +213,7 @@ if (isset($_GET['edit'])) {
       $sql->execute();
       if ($sql->rowCount() == 0) {
         $_SESSION['error'] = 'postnonexist';
-        header("Location: $redirecturl");
-        header("HTTP/1.1 303 See Other");
-        die("redirecting");
+        redirect();
       }
       foreach ($sql->fetchAll() as $row) {
         $edittitle = $row["postTitle"];
@@ -263,9 +259,7 @@ if(isset($_GET['delete'])) {
     $sql->closeCursor();
   }
   // Redirect if not logged in
-  header("Location: $redirecturl");
-  header("HTTP/1.1 303 See Other");
-  die("redirecting");
+  redirect();
 }
 
 // get statistics from the database, just for bants

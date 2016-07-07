@@ -1,7 +1,7 @@
 <?php
-error_reporting(1);
+error_reporting(-1);
 ini_set('display_errors', 'On');
-if ($_GET['deploy'] == 'user') {
+if (isset($_GET['deploy']) && $_GET['deploy'] == 'user') {
   require_once('note/config/config.php');
   $conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
   $sql = "CREATE TABLE IF NOT EXISTS `cmsData` (
