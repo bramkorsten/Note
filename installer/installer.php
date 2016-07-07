@@ -55,7 +55,7 @@ if (isset($_GET['deploy']) && $_GET['deploy'] == 'user') {
 	<div class="note"></div>
 	<div class="message loginmessage visible">
 	<p>
-		To finish the deployment, please make an admininstrator account.
+		Lets finish up! Please make an admininstrator account.
   </p>
   <div class="arrow-down"></div>
   </div>
@@ -86,46 +86,55 @@ if (isset($_GET['deploy']) && $_GET['deploy'] == 'user') {
 </html>
   ';
 } else if (isset($_GET['install']) && $_GET['install'] == true) {
-    /* Source File URL */
+	echo "<code>
+	Hello World...<br>Your PHP version: <b>" . phpversion() . "</b><br>Setting up...";
+	if (version_compare(phpversion(), '5.3.7') < 0)
+	{
+		echo "
+		Failed!<br>Your php version is not compitable with Note!<br>The installer returned 0<br>";
+		die("Process terminated!");
+	}
   $remote_file_url = 'http://bramkorsten.io/downloads/note/note.zip';
-
-  /* New file name and path for this file */
   $local_file = 'note-installer.zip';
-
-  /* Copy the file from source url to server */
+	echo "Done!<br>Downloading Note...";
   $copy = copy($remote_file_url, $local_file);
-
-  /* Add notice for success/failure */
   if (!$copy) {
-      echo "There was an error while downloading Note to the server...\n";
+      echo "Failed!<br>There was an error while downloading Note to the server...<br>The installation has failed<br>The installer returned 0";
   }
   else {
-    echo "Note was downloaded succesfully!\n";
     $path = pathinfo(realpath($local_file), PATHINFO_DIRNAME);
+		echo "Done!<br>Download successful<br><br>Extracting to ". $path . "...";
     $zip = new ZipArchive;
     $res = $zip->open($local_file);
     if ($res === TRUE) {
         $zip->extractTo($path);
         $zip->close();
-        echo "Note has succesfully been extracted to $path";
+        echo "Done!<br>";
         $installed = true;
     } else {
-        echo "There was an error while opening Note!";
+        echo "Failed!<br>There was an error while extracting Note...<br>The installation has failed<br>The installer returned 0</code>";
     }
   }
   
-  if ($installed) {
+  if (isset($installed) && $installed) {
     echo <<<DATABASE_FORM
 
-		<p>Please enter the details of your database connection.</p>
+		Please enter the details of your database connection.<br>
+		Note will never, under any circumstances, share credentials with anyone.
+		<br><br>
     <form action="installer.php" method="POST">
-			 <input type="text" name="db" value="database"><br>
-       <input type="text" name="dbhost" value="localhost"><br>
-       <input type="text" name="dbuser" value="username"><br>
-       <input type="password" name="dbpass" value="password"><br>
-       <input type="submit" name="dbsubmit">
+			Database name:<br>
+			<input type="text" name="db" value=""><br>
+			Database location:<br>
+			<input type="text" name="dbhost" value="localhost"><br>
+			Username:<br>
+			<input type="text" name="dbuser" value=""><br>
+			Password:<br>
+			<input type="password" name="dbpass" value=""><br><br>
+			<input type="submit" value="Continue" name="dbsubmit">
     </form>
-  
+  	</code>
+
 DATABASE_FORM;
 }
 }
@@ -151,8 +160,8 @@ $conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
   // Run the query
   if (!mysqli_query($conn, $sql)) {
     echo ('Invalid query: ' . mysqli_error($conn));
-    echo "something went wrong while registering the administrator account! <br>
-		Please ask the developer of Note for help, or check the github page.";
+    die("something went wrong while registering the administrator account! <br>
+		Please ask the developer of Note for help, or check the github page.");
   }
   else {
     unlink("note.zip");
@@ -167,20 +176,30 @@ $conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
 }
 
 else if (isset($_POST['dbsubmit'])) {
+	echo "<code>
+	Getting metadata from release...";
   ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)'); 
   $metadata = json_decode(file_get_contents('https://api.github.com/repos/Exentory/Note-CMS/releases/latest'), true);
+	if (!$metadata) {
+		echo "Failed!<br>Could not get metadata from stream.<br>";
+		die("Installation failed!<br>The installer returned 0");
+	}else{
+		echo "Done!<br>Writing to configuration file...";
+	}
   $newversion = $metadata['tag_name'];
-  $config = fopen("note/config/config.json", "w") or die('Could not build config file');
+  $config = fopen("note/config/config.json", "w") or die('Failed!<br>Could not write configuration file...<br>Installation failed');
   $database_info = array();
   $info = array('server'=> $_POST['dbhost'], 'username'=> $_POST['dbuser'], 'data'=> $_POST['db'], 'password'=> $_POST['dbpass']);
   $versioninfo = array();
   $database_info['database'] = $info;
   $database_info['core'] = array('version'=> $newversion);
   $chmoded = chmod("note/config/config.json", 0600); 
-  if (!$chmoded) {echo "Could not change the file permissions, you might be on localhost"; }
+  if (!$chmoded) {echo "Done!<br>Could not change the file permissions, you might be on localhost"; }
   else {
-    echo "Configuration file created! <br> Please note that the config file will not be safe if run on localhost! <br>
-		[note-path]/config/config.json should have permissions 0-6-0-0. <br>
+    echo "Done!<br>Configuration file created!<br>Please note that the config file will not be secure if ran on localhost!<br>
+		[note-path]/config/config.json should have permissions <b>0-6-0-0</b><br>Current permissions: <b>"
+		. substr(sprintf('%o', fileperms('note/config/config.json')), -4) .
+		"</b><br><br>
     Click <a href='installer.php?deploy=user'>here</a> to continue setting up Note.";
   }
   fwrite($config, json_encode($database_info));
@@ -216,7 +235,8 @@ else {
 				h2, p {
 					font-family: 'Georgia';
 					text-align: center;
-					padding: 20px 10px;
+					padding: 20px 20px;
+					font-style: italic;
 				}
 				
 				h2 {
@@ -237,13 +257,25 @@ else {
 		<body>
 		<div class='newuser-wrapper'>
 			<div class='note'></div>
-			<div class='note-content-container'>
-				<h2>Hello.</h2>
-				<p>click <a href='installer.php?install=true'>here</a> to download the latest version of Note</p>
-			</div>
+			<div class='note-content-container'>";
+	if (version_compare(phpversion(), '5.3.7') >= 0)
+	{
+		echo "
+		<h2>Hello.</h2>
+		<p>click <a href='installer.php?install=true'>here</a> to download the latest version of Note</p>";
+	}
+	else {
+		echo "
+		<h2>Uh Oh.</h2>
+		<p>Your PHP version is <b>". phpversion() . "</b>, which is not supported by Note.<br>
+		The minimal version required for Note is <b>5.3.7</b><br>
+		Contact your administrator for steps on how to upgrade your php version.</p>";
+	}
+	
+	echo ("</div>
 		</div>
 		</body>
 	</html>
-	";
+	");
 }
 ?>
