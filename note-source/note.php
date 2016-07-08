@@ -1,7 +1,7 @@
 <?php
 error_reporting(-1);
 ini_set('display_errors', 'On');
-
+sec_session_start();
 // Require the config file. this file reads the database info from a JSON file
 require_once('config/config.php');
 // The message if it needs to popup
@@ -19,6 +19,29 @@ function connect($s_Server, $s_Database, $s_Username, $s_Password) {
 		echo "An error has occurred: " . $e->getMessage();
 	}
 	return $conn;
+}
+
+function sec_session_start() {
+    $session_name = 'note_session_id';   // Set a custom session name
+    $usinghttps = false;
+    // This stops JavaScript being able to access the session id.
+    $httponly = true;
+    // Forces sessions to only use cookies.
+    if (ini_set('session.use_only_cookies', 1) === FALSE) {
+        header("Location: redirect.php");
+        exit();
+    }
+    // Gets current cookies params.
+    $cookieParams = session_get_cookie_params();
+    session_set_cookie_params($cookieParams["lifetime"],
+        $cookieParams["path"], 
+        $cookieParams["domain"], 
+        $usinghttps,
+        $httponly);
+    // Sets the session name to the one set above.
+    session_name($session_name);
+    session_start();            // Start the PHP session 
+    session_regenerate_id(true);    // regenerated the session, delete the old one. 
 }
 
 function redirect() {
