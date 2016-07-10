@@ -7,7 +7,7 @@ if (isset($_GET['deploy']) && $_GET['deploy'] == 'user') {
   $sql = "CREATE TABLE IF NOT EXISTS `cmsData` (
           `postID` varchar(13) NOT NULL,
           `postTitle` varchar(150) DEFAULT NULL,
-          `postData` varchar(10000) DEFAULT NULL,
+          `postData` varchar(90000) DEFAULT NULL,
           `postTime` varchar(100) DEFAULT NULL,
           PRIMARY KEY (`postID`),
           UNIQUE KEY `postID` (`postID`)
@@ -164,13 +164,13 @@ $conn = new mysqli( $s_Server, $s_Username, $s_Password, $s_Database);
 		Please ask the developer of Note for help, or check the github page.");
   }
   else {
-    unlink("note.zip");
-    unlink("note-installer.php");
     $_SESSION['error'] = "We're all set! Welcome to Note!";
     $_SESSION['admin'] = false;
     // Redirect
     header("Location: note/index.php");
     header("HTTP/1.1 303 See Other");
+		unlink("note-installer.zip");
+    unlink("installer.php");
     die("redirecting");
   }
 }

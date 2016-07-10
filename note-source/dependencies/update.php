@@ -7,7 +7,7 @@ if (isset($_GET['deploy']) && $_GET['deploy'] == 'user') {
   $sql = "CREATE TABLE IF NOT EXISTS `cmsData` (
           `postID` varchar(13) NOT NULL,
           `postTitle` varchar(150) DEFAULT NULL,
-          `postData` varchar(10000) DEFAULT NULL,
+          `postData` varchar(90000) DEFAULT NULL,
           `postTime` varchar(100) DEFAULT NULL,
           PRIMARY KEY (`postID`),
           UNIQUE KEY `postID` (`postID`)
