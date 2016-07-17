@@ -1,4 +1,5 @@
 note-source/config/config.json
 note-source/error_log
+note-source/backup/*
 note-source/ui/error_log
 index.php
