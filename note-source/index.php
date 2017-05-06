@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="img/favicon.ico">
     <link rel="icon" href="img/favicon.ico">
     <title>Note - Adminpanel</title>
-    <link rel="stylesheet" href="css/admin.css?v=1.4">
+    <link rel="stylesheet" href="css/note.css?v=1.4">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="//bramkorsten.io/downloads/ckeditor/ckeditor.js"></script>
@@ -25,19 +25,19 @@
     <?php
       if (isset($_SESSION["admin"]) && $_SESSION["admin"]) {
         require('ui/adminbar.php');
-        
+
         if (!isset($_GET["ref"])) {
           $_GET["ref"] = NULL;
         }
-        
+
         if (!isset($error)) {
           $error = NULL;
         }
-        
+
         if (!isset($_SESSION['error'])) {
           $_SESSION['error'] = NULL;
         }
-        
+
         if (($_GET["ref"] == 'postcreator') || (isset($_GET["edit"]))) {
           require('ui/editor.php');
           unset($_SESSION['editID']);
@@ -60,5 +60,5 @@
   </div>
   </div>
   </body>
-  
+
 </html>

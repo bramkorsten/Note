@@ -34,14 +34,14 @@ function sec_session_start() {
     // Gets current cookies params.
     $cookieParams = session_get_cookie_params();
     session_set_cookie_params($cookieParams["lifetime"],
-        $cookieParams["path"], 
-        $cookieParams["domain"], 
+        $cookieParams["path"],
+        $cookieParams["domain"],
         $usinghttps,
         $httponly);
     // Sets the session name to the one set above.
     session_name($session_name);
-    session_start();            // Start the PHP session 
-    session_regenerate_id(true);    // regenerated the session, delete the old one. 
+    session_start();            // Start the PHP session
+    session_regenerate_id(true);    // regenerated the session, delete the old one.
 }
 
 function redirect() {
@@ -102,7 +102,7 @@ else if (isset($_POST['usersubmit'])) {
   $email = filter_input(INPUT_POST, 'newemail', FILTER_SANITIZE_EMAIL); //DUE TO CHANGE
   // Hash the new password
   $hashedpassword = password_hash($password, PASSWORD_BCRYPT);
-	
+
   $query = "INSERT INTO `user` (
   `username` ,
   `email` ,
@@ -112,7 +112,7 @@ else if (isset($_POST['usersubmit'])) {
   :user,  :email,  :password
   );
   ";
-	
+
   try {
     $sql = $conn->prepare($query);
     $sql->bindParam(":user", $username);
@@ -155,7 +155,7 @@ else if(isset($_POST['post-submit'])) {
       $_SESSION["error"] = 'postsubmitfailed';
     }
     $sql->closeCursor();
-		
+
     if (!empty($_POST['metatags'])) {
       $metatags = explode(',',$_POST['metatags']);
       foreach($metatags as $tag) {
@@ -189,7 +189,7 @@ else if(isset($_POST['edit-submit'])) {
     // and reset the session to prevent loops (see top of page)
     $editID = $_SESSION['edit-ID'];
     unset($_SESSION['edit-ID']);
-		
+
     try {
       $sql = $conn->prepare("UPDATE `cmsData` SET `postTitle` = :title, `postData` = :data WHERE  `postID` =  :id");
       $sql->bindParam(":id", $editID);
@@ -213,7 +213,7 @@ else if(isset($_POST['edit-submit'])) {
 }
 
 // If the user did not enter all the login fields
-else if (isset($_POST['user']) || isset($_POST['pass'])) 
+else if (isset($_POST['user']) || isset($_POST['pass']))
 {
   // Set the error
   $_SESSION["error"] = 'Please fill in all fields';
@@ -262,7 +262,7 @@ if (isset($_GET['edit'])) {
   }
   else {
     $_SESSION['editID'] = $editID;
-  } 
+  }
 }
 
 // If the user wants to delete a post
@@ -363,18 +363,16 @@ function display_public($connection, $post = NULL, $tag = NULL) {
           $nUpdated = date("l F jS Y \@ g:i a",$row['postTime']);
           $entry_display = <<<ENTRY_DISPLAY
 
-      <article class="note c_b_white">
-			<h1>
+    <article class="note_article">
+			<h2>
 				$title
-			</h1>
+			</h2>
 				$bodytext
-		  <div class="post-date"><div class="noted"></div> on $nUpdated - <a href="note/index.php?edit=$postID">edit</a></div>
-			<div class="scribble"></div>
     </article>
-  
+
 ENTRY_DISPLAY;
-					
-            // Return the posts, which are all saves in the variable
+					//<div class="post-date"><div class="noted"></div> on $nUpdated - <a href="note/index.php?edit=$postID">edit</a></div>
+        	// Return the posts, which are all saves in the variable
   echo $entry_display;
         }
       }

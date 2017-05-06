@@ -1,4 +1,0 @@
-[13-Jun-2016 07:31:47 America/New_York] PHP Parse error:  syntax error, unexpected ';', expecting ',' or ')' in /home/bramgyem/public_html/downloads/note/note/ui/update-notif.php on line 6
-[13-Jun-2016 07:39:17 America/New_York] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/bramgyem/public_html/downloads/note/note/ui/update-notif.php on line 9
-[13-Jun-2016 07:39:28 America/New_York] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/bramgyem/public_html/downloads/note/note/ui/update-notif.php on line 9
-[13-Jun-2016 07:39:29 America/New_York] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/bramgyem/public_html/downloads/note/note/ui/update-notif.php on line 9

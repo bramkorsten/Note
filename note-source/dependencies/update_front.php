@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ed1c24" /><!--#20C520 #ed1c24-->
     <title>Update Note</title>
-    <link rel="stylesheet" href="../css/admin.css?v=1.4">
+    <link rel="stylesheet" href="../css/note.css?v=1.4">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="../js/main.min.js"></script>
   </head>
