@@ -17,27 +17,20 @@
       <h2 class="hello">Hello!</h2>
     </div>
     <div class="login_inner_wrap">
-      <h3>Welcome to Note</h3>
-      <p>Please login to continue</p>
+      <h3>Please login to continue.</h3>
+      <form class="inner_login_form" action="redirect.php" method="POST">
+        <input class="logininput" autocomplete="new-password" type="text" name="user" value="" placeholder="Username" size="20">
+        <br>
+        <input class="logininput" autocomplete="new-password" type="password" placeholder="Password" name="pass" value="">
+        <br>
+        <input class="submitbutton loginbutton" type="submit" name="submit" value="Login">
+      </form>
   </div>
   </div>
-  <form class="loginform" action="redirect.php" method="POST">
-    <p class="label">
-      Username
-    </p>
-    <input class="logininput" type="text" name="user" value="" size="20">
-    <br>
-    <p class="label">
-      Password
-    </p>
-    <input class="logininput" type="password" name="pass" value="">
-    <br>
-    <input class="submitbutton loginbutton" type="submit" name="submit" value="Login">
-  </form>
+
   <div class="note"></div>
   <p class="powered">
-    <i>Powered by Note - <?php echo($version); ?><br>
-      By Bram Korsten</i>
+    <i><?php echo($version); ?></i>
   </p>
   <audio id="audiomelone">
   <source src="video/watermelone.ogg" type="audio/ogg">
