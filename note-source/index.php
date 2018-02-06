@@ -12,9 +12,9 @@
     <link rel="icon" href="img/favicon.ico">
     <title>Note - Adminpanel</title>
     <link rel="stylesheet" href="css/note.css">
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/main.min.js"></script>
-    <script src="//bramkorsten.nl/downloads/ckeditor/ckeditor.js"></script>
+    <script src="https://bramkorsten.nl/downloads/ckeditor/ckeditor.js"></script>
     <link rel="stylesheet" href="css/tags-input.css">
     <script src="js/tags-input.js"></script>
   </head>
