@@ -1,6 +1,6 @@
 # Note
 
-check it out here: http://bramkorsten.io/examples/note/
+check it out here: http://bramkorsten.nl/examples/note/
 
 Username: test
 

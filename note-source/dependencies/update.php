@@ -53,9 +53,8 @@ if (isset($_GET['deploy']) && $_GET['deploy'] == 'user') {
 }
 
 else if (isset($_GET['install']) && $_GET['install'] == true) {
-    /* Source File URL */
+  /* Source File URL */
   $remote_file_url = 'https://bramkorsten.nl/downloads/note/note.zip';
-
   /* New file name and path for this file */
   $local_file = '../../update.zip';
 
