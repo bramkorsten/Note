@@ -2,7 +2,7 @@
   require_once('note.php');
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -11,10 +11,10 @@
     <link rel="shortcut icon" href="img/favicon.ico">
     <link rel="icon" href="img/favicon.ico">
     <title>Note - Adminpanel</title>
-    <link rel="stylesheet" href="css/note.css?v=1.4">
+    <link rel="stylesheet" href="css/note.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/main.min.js"></script>
-    <script src="//bramkorsten.io/downloads/ckeditor/ckeditor.js"></script>
+    <script src="//bramkorsten.nl/downloads/ckeditor/ckeditor.js"></script>
     <link rel="stylesheet" href="css/tags-input.css">
     <script src="js/tags-input.js"></script>
   </head>

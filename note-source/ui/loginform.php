@@ -1,9 +1,10 @@
 <div class="login-wrapper">
-  <div class="message loginmessage
+  <div class="note"></div>
+  <div class="message loginmessage 
               <?php if (isset($error) && ($error != "none")) {
-  echo ('visible'); }
+  echo ('visible'); } 
               else {
-                echo ('hidden'); }
+                echo ('hidden'); } 
               ?>">
   <p>
     <?php echo ($error);
@@ -12,25 +13,23 @@
   </p>
   <div class="arrow-down"></div>
   </div>
-  <div class="loginform">
-    <div class="gradient_header">
-      <h2 class="hello">Hello!</h2>
-    </div>
-    <div class="login_inner_wrap">
-      <h3>Please login to continue.</h3>
-      <form class="inner_login_form" action="redirect.php" method="POST">
-        <input class="logininput" autocomplete="new-password" type="text" name="user" value="" placeholder="Username" size="20">
-        <br>
-        <input class="logininput" autocomplete="new-password" type="password" placeholder="Password" name="pass" value="">
-        <br>
-        <input class="submitbutton loginbutton" type="submit" name="submit" value="Login">
-      </form>
-  </div>
-  </div>
-
-  <div class="note"></div>
+  <form class="loginform" action="redirect.php" method="POST">
+    <p class="label">
+      Username
+    </p>
+    <input class="logininput" type="text" name="user" value="" size="20">
+    <br>
+    <p class="label">
+      Password
+    </p>
+    <input class="logininput" type="password" name="pass" value="">
+    <br>
+    <input class="submitbutton loginbutton" type="submit" name="submit" value="Login">
+  </form>
+  
   <p class="powered">
-    <i><?php echo($version); ?></i>
+    <i>Powered by Note - <?php echo($version); ?><br>
+      By Bram Korsten</i>
   </p>
   <audio id="audiomelone">
   <source src="video/watermelone.ogg" type="audio/ogg">
